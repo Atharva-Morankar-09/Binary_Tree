@@ -1,1 +1,58 @@
 
+**    PREORDER TRAVERSALS   **
+
+class Solution {
+public:
+    vector<int> ans;
+    void preOrder(TreeNode* root){
+         if(root!=NULL){
+            ans.push_back(root->val);
+            preorderTraversal(root->left);
+            preorderTraversal(root->right);
+        }
+    }
+    
+    vector<int> preorderTraversal(TreeNode* root) {
+        
+        preOrder(root);
+        return ans;  
+    }
+};
+
+**    INORDER TRAVERSALS    **
+
+class Solution {
+public:
+    vector<int> ans;
+    
+    void inOrder(TreeNode* root){
+        if(root!=NULL){
+            inOrder(root->left);
+            ans.push_back(root->val);
+            inOrder(root->right);
+        }
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+         inOrder(root);
+       return ans;  
+    }
+};
+
+**    POSTORDER TRAVERSAL   **
+
+class Solution {
+public:
+    vector<int> ans;
+    
+    void postOrder(TreeNode* root){
+        if(root!=NULL){
+            postOrder(root->left);
+            postOrder(root->right);
+            ans.push_back(root->val);
+        }
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+         postOrder(root);
+        return ans;
+    }
+};
