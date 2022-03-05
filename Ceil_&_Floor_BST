@@ -1,0 +1,52 @@
+
+// CEIL OF A GIVEN BST
+
+int findCeil(TreeNode* root, int key)
+{
+    int ceil = -1;
+    while(root!=NULL)
+    {
+        if(root->val==key)
+        {
+            ceil=root->val;
+            return ceil;
+        }
+        
+        if(root->val>key)
+        {
+            ceil=root->val;
+            root=root->left;
+        }
+        else
+        {
+            root->right;
+        }
+    }
+   return ceil; 
+}
+
+
+// FLOOR OF A GIVEN BST
+
+int findfloor(TreeNode* root, int key)
+{
+    int floor=-1;
+    while(root!=NULL)
+    {
+        if(root->val==key)
+        {
+            floor=root->val;
+            return floor;
+        }
+        if(root->val > key)
+        {
+            root=root->left;
+        }
+        else
+        {
+            floor=root->val;
+            root=root->right;
+        }
+    }
+   return floor; 
+}
