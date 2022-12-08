@@ -1,0 +1,49 @@
+
+Question Link - https://practice.geeksforgeeks.org/problems/maximum-path-sum/1
+
+class Solution {
+public:
+
+    int rec(Node* curr, int& ans){
+        if(curr==NULL){
+            return 0;
+        }
+        if(curr->left==NULL && curr->right==NULL){
+            return curr->data;
+        }
+        
+        int lt = rec(curr->left,ans);
+        int rt = rec(curr->right,ans);
+        
+        if(curr->left==NULL){
+            return curr->data + rt;
+        }
+        
+        if(curr->right==NULL){
+            return curr->data + lt;
+        }
+        
+        ans = max(ans,lt+rt+curr->data);
+     
+      return curr->data + max(lt,rt);    
+    }
+
+    int maxPathSum(Node* root)
+    {
+        if(root==NULL){
+            return 0;
+        }
+        
+        if(root->left==NULL && root->right==NULL){
+            return root->data;
+        }
+        
+        int ans=INT_MIN;
+        int val=rec(root,ans);
+        
+        if(root->left==NULL || root->right==NULL){
+            return max(val,ans);
+        }
+      return ans;    
+    }
+};
