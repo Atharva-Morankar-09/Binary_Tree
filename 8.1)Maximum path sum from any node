@@ -1,0 +1,26 @@
+
+Question Link - https://practice.geeksforgeeks.org/problems/maximum-path-sum-from-any-node/1
+
+class Solution {
+  public:
+    
+    int rec(Node* curr, int& ans){
+        if(curr==NULL){
+            return 0;
+        }
+        
+        int lt = max(0,rec(curr->left,ans));
+        int rt = max(0,rec(curr->right,ans));
+        
+        ans = max(ans,lt+rt+curr->data);
+        
+      return curr->data + max(lt,rt);    
+    }
+    
+    int findMaxSum(Node* root)
+    {
+        int ans=INT_MIN;
+        rec(root,ans);
+        return ans;
+    }
+};
