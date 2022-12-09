@@ -1,0 +1,28 @@
+
+Question Link - https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
+
+class Solution {
+public:    
+    void rec(TreeNode* curr, int currMax, int currMin, int& ans)
+    {
+        if(curr==NULL){
+            return ;
+        }      
+        int diff = max(abs(currMax - curr->val), abs(currMin - curr->val));
+        ans=max(ans,diff);
+        currMax=max(currMax,curr->val);
+        currMin=min(currMin,curr->val);
+        rec(curr->left,currMax,currMin,ans);
+        rec(curr->right,currMax,currMin,ans);
+    }
+    
+    int maxAncestorDiff(TreeNode* root) 
+    {
+        if(root==NULL){
+            return 0;
+        }
+        int ans=0;
+        rec(root,root->val,root->val,ans);
+       return ans; 
+    }
+};
