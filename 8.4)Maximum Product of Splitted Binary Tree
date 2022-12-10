@@ -1,0 +1,20 @@
+
+Question Link - https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/
+
+class Solution {
+public:
+    long ans=0,tot=0,sum=0;
+    int maxProduct(TreeNode* root) {
+        tot = rec(root),rec(root);
+        return ans % (int)(1e9+7);
+    }
+    
+    int rec(TreeNode* curr){
+        if(curr==NULL){
+            return 0;
+        }
+        sum = curr->val + rec(curr->left) + rec(curr->right);
+        ans = max(ans, (sum*(tot-sum)));
+        return sum;
+    }
+};
