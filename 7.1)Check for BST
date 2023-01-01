@@ -1,0 +1,29 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/check-for-bst/1
+
+1) 
+
+class Solution
+{
+    public:
+    void inOrder(Node* curr, vector<int>& v){
+        if(curr!=NULL){
+            inOrder(curr->left,v);
+            v.push_back(curr->data);
+            inOrder(curr->right,v);
+        }
+    }
+    
+    bool isBST(Node* root) 
+    {
+        vector<int> real,copy;
+        inOrder(root,real);
+        copy=real;
+        sort(copy.begin(),copy.end());
+        return copy==real;
+    }
+};
+
+
+
+
