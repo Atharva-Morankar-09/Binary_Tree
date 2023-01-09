@@ -1,0 +1,23 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/d7e0ce338b11f0be36877d9c35cc8dfad6636957/1
+
+class Solution {
+  public:
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    
+    int rec(Node* curr){
+        if(curr==NULL){
+            return 0;
+        }   
+        int sum = rec(curr->left)+rec(curr->right);
+        int currVal = curr->data;
+        curr->data=sum;
+        return sum+currVal;
+    }
+    
+    void toSumTree(Node *node)
+    {
+        int ans = rec(node);
+    }
+};
