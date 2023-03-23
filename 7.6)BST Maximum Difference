@@ -1,0 +1,46 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/e841e10213ddf839d51c2909f1808632a19ae0bf/1
+
+class Solution{
+public:
+    
+    void rec(Node* curr, int& t, int sum, int& ans){
+        if(curr!=NULL){
+            if(curr->data==t){
+                int val=tToLeaf(curr);
+                ans=sum+curr->data-val;
+                return ;
+            }
+            else if(curr->data>t){
+                rec(curr->left,t,sum+curr->data,ans);
+            }
+            else{
+                rec(curr->right,t,sum+curr->data,ans);
+            }
+        }
+    }
+    
+    int tToLeaf(Node* curr){
+        if(curr==NULL){
+            return 1e5;
+        }
+        else if(curr->left==NULL && curr->right==NULL){
+            return curr->data;
+        }
+        
+        int left=curr->data+tToLeaf(curr->left);
+        int right=curr->data+tToLeaf(curr->right);
+        
+       return min(left,right);    
+    }
+
+    int maxDifferenceBST(Node *root,int target){
+        int ans=-1;
+        int sum=0;
+        rec(root,target,sum,ans);
+        if(ans==-1){
+            return -1;
+        }
+      return ans;    
+    }
+};
