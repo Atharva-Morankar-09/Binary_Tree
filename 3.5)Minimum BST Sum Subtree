@@ -1,0 +1,43 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/d064cc0468a5c2bb7817ecd7c1bc59ce25e23613/1
+
+
+class Solution {
+public:
+    int ans=INT_MAX;
+    
+    bool check(Node* curr, int min, int max){
+        if(curr==NULL){
+            return true;
+        }
+        
+        if(curr->data<min || curr->data>max){
+            return false;
+        }
+        
+      return check(curr->left,min,curr->data-1) && check(curr->right,curr->data+1,max);    
+    }
+    
+    pair<int,int> rec(Node* curr, int t){
+        
+        if(curr==NULL){
+            return {0,0};
+        }
+        
+        auto l = rec(curr->left,t);
+        auto r = rec(curr->right,t);
+        
+        if(l.second+r.second+curr->data==t){
+            if(check(curr,INT_MIN,INT_MAX)){
+                ans=min(ans,l.first+r.first+1);
+            }
+        }
+        
+        return {1+l.first+r.first, curr->data+l.second+r.second};
+    }
+    
+    int minSubtreeSumBST(int target, Node *root) {
+        rec(root,target);
+        return ans==INT_MAX?-1:ans;
+    }
+};
