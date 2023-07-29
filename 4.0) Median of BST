@@ -1,0 +1,25 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/median-of-bst/1
+
+void rec(Node* curr, vector<float>& v){
+    if(curr!=NULL){
+        rec(curr->left, v);
+        v.push_back(curr->data);
+        rec(curr->right, v);
+    }
+}
+
+float findMedian(struct Node *root)
+{
+      vector<float> val;
+      rec(root,val);
+      float ans;
+      
+      if(val.size()%2==0){
+          ans = (val[val.size()/2] + val[val.size()/2 - 1]) / 2;
+      }
+      else{
+          ans = val[val.size()/2];
+      }
+    return ans;  
+}
