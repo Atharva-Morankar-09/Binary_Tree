@@ -1,0 +1,46 @@
+
+GFG Link - https://practice.geeksforgeeks.org/problems/inorder-successor-in-bst/1
+
+1) 
+class Solution{
+  public:
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        Node* ans = NULL;
+        while(root!=NULL){
+            if(root->data <= x->data){
+                root = root->right;
+            }
+            else{
+                ans = root;
+                root = root->left;
+            }
+        }
+      return ans;    
+    }
+};
+
+2)
+class Solution{
+  public:
+    void rec(Node* curr, vector<Node* >& v){
+        if(curr!=NULL){
+            rec(curr->left, v);
+            v.push_back(curr);
+            rec(curr->right, v);
+        }
+    }
+    
+    Node* inOrderSuccessor(Node *root, Node *x)
+    {
+        vector<Node*> v;
+        rec(root,v);
+        for(int i=0;i<v.size();i++){
+            if(x==v[i] && i+1<v.size()){
+                return v[i+1];
+            }
+        }
+       return NULL;
+    }
+};
